@@ -1,8 +1,11 @@
 import { useState } from "react";
 
+import "./Error.css";
+
 export function CreateRecordPage(props) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [error, setError] = useState();
 
   const clear = () => {
     setName("");
@@ -12,9 +15,9 @@ export function CreateRecordPage(props) {
   const applyResult = (result) => {
     if (result.ok) {
       clear();
-    } else {
-      window.alert("Nepavyko sukurti: " + result.status);
-    }
+    } else if (result.status === 400) {
+      setError("Straipsnis su šia antrašte jau publikuotas!");
+    } 
   };
 
   const createRecord = () => {
@@ -55,6 +58,7 @@ export function CreateRecordPage(props) {
       <div>
         <button onClick={createRecord}>Publikuoti</button>
       </div>
+      {error && <div className="error">{error}</div>}
     </fieldset>
   );
 }

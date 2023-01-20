@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { CreateComment } from "./CreateComment";
 
 export function SingleRecordPage(props) {
   const [record, setRecord] = useState("");
@@ -27,6 +28,9 @@ export function SingleRecordPage(props) {
         <b>Description</b>
       </div>
       <div>{record.description}</div>
+
+      <br />
+      <CreateComment />
     </div>
   );
 }
